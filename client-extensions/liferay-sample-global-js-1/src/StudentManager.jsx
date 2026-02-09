@@ -8,7 +8,6 @@ const StudentManager = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                // React → Node.js Backend (port 3001) → Liferay
                 const response = await axios.get(
                     "http://localhost:3001/api/students"
                 );

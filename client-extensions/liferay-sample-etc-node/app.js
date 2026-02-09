@@ -12,19 +12,19 @@ import config from './config.js';
 const app = express();
 const serverPort = config['server.port'];
 
-// Middleware
-app.use(cors()); // Allow all origins for development
+
+app.use(cors()); 
 app.use(express.json());
 
-// Health check endpoint
+
 app.get('/ready', (req, res) => {
 	res.send('READY');
 });
 
-// GET /api/students - Fetch students from Liferay
+
 app.get('/api/students', async (req, res) => {
 	try {
-		console.log('📞 React → Node: Fetching students from Liferay...');
+		console.log('Fetching students from Liferay');
 
 		const response = await axios.get(
 			`${config['liferay.url']}/o/c/studentses`,
@@ -36,12 +36,12 @@ app.get('/api/students', async (req, res) => {
 			}
 		);
 
-		console.log('✅ Node → Liferay: Successfully fetched students');
-		console.log(`📊 Found ${response.data.items?.length || 0} students`);
+		console.log('fetched students');
+		console.log(`Found ${response.data.items?.length || 0} students`);
 
 		res.json(response.data);
 	} catch (error) {
-		console.error('❌ Error fetching students from Liferay:', error.message);
+		console.error('Error fetching students from Liferay:', error.message);
 		res.status(500).json({
 			error: 'Failed to fetch students from Liferay',
 			details: error.message,
@@ -50,8 +50,7 @@ app.get('/api/students', async (req, res) => {
 });
 
 app.listen(serverPort, () => {
-	console.log(`🚀 Student Manager Backend running on http://localhost:${serverPort}`);
-	console.log(`📡 Flow: React → Node (${serverPort}) → Liferay (${config['liferay.url']})`);
+	console.log(`Student Manager Backend running on http://localhost:${serverPort}`);
 });
 
 export default app;
