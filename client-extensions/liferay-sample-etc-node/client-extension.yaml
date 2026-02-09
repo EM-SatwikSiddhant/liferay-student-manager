@@ -1,0 +1,8 @@
+assemble:
+    -   include:
+            -   "**/*.js"
+            -   package.json
+liferay-sample-etc-node:
+    name: Student Manager Backend
+    .serviceAddress: localhost:3001
+    .serviceScheme: http
